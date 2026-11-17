@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import qs from 'qs';
 import { NextRequest, NextResponse } from 'next/server';
 
+
 export async function GET(request: NextRequest) {
   console.log('inside GET');
 
@@ -53,9 +54,9 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     const axiosError = error as AxiosError;
     const statusCode = axiosError.response?.status || 500;
-    const errorMessage = axiosError.response?.data || 'Internal server error';
+    const errorMessage = axiosError.response?.data || axiosError.message || 'Internal server error';
 
     console.error('Error exchanging authorization code for access token:', errorMessage);
-    return NextResponse.json({ error: 'Failed to fetch token' }, { status: statusCode });
+    return NextResponse.json({ error: 'Failed to fetch token', details: errorMessage }, { status: statusCode });
   }
 }

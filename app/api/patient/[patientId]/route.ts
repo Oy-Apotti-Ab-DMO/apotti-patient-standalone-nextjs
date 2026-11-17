@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 
+
 console.log('route.ts alkaa');
 
 export async function GET(request: NextRequest, { params }: { params: { patientId: string } }) {
@@ -10,7 +11,6 @@ export async function GET(request: NextRequest, { params }: { params: { patientI
 
   console.log('API route hit: /api/patient/[patientId]');
   console.log('Received patientId:', patientId);
-  console.log('Extracted access token:', accessToken);
   
   if (!accessToken) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

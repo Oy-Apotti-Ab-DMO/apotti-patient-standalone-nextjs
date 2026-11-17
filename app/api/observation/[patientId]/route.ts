@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 
+
 export async function GET(request: NextRequest, { params }: { params: { patientId: string } }) {
   const FHIR_SERVER_URL = process.env.NEXT_PUBLIC_FHIR_SERVER;
   const patientId = params.patientId; // Extract patientId from the route params
@@ -10,7 +11,6 @@ export async function GET(request: NextRequest, { params }: { params: { patientI
 
   console.log('FHIR_SERVER_URL',FHIR_SERVER_URL);
   console.log('observation patientId:', patientId);
-  console.log('observation accessToken:', accessToken);
 
   if (!accessToken) {
     return NextResponse.json({ error: 'Missing access token' }, { status: 401 });
